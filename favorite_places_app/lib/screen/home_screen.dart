@@ -1,23 +1,17 @@
+import 'package:favorite_places_app/providers/places_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:favorite_places_app/widgets/places_list.dart';
 import 'package:favorite_places_app/screen/add_place_screen.dart';
+import 'package:favorite_places_app/model/place.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  void _addItem() {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (ctx) => const AddPlaceScreen()),
-    );
-  }
+class HomeScreen extends ConsumerWidget {
+  HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<Place> userPLaces = ref.watch(placesProvider);
+
     final AppBar appbar = AppBar(
       centerTitle: true,
       elevation: 3,
@@ -26,7 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
       title: const Text('Your Places'),
       actions: [
         IconButton(
-          onPressed: _addItem,
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (ctx) => const AddPlaceScreen(),
+            ));
+          },
           icon: Icon(Icons.add_circle_rounded,
               size: 30, color: Theme.of(context).colorScheme.primaryFixed),
         ),
@@ -35,7 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: appbar,
-      body: PlacesList(),
+      body: PlacesList(
+        places: userPLaces,
+      ),
     );
   }
 }

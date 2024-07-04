@@ -1,13 +1,33 @@
+import 'package:favorite_places_app/providers/places_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddPlaceScreen extends StatefulWidget {
+class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
 
   @override
-  State<AddPlaceScreen> createState() => _AddPlaceScreenState();
+  ConsumerState<AddPlaceScreen> createState() => _AddPlaceScreenState();
 }
 
-class _AddPlaceScreenState extends State<AddPlaceScreen> {
+class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
+  final TextEditingController _titleController = TextEditingController();
+
+  void _savePlace() {
+    final enteredTitle = _titleController.text;
+
+    if (enteredTitle.isEmpty || enteredTitle.trim().isEmpty) {
+      return;
+    }
+    ref.read(placesProvider.notifier).addPlace(enteredTitle);
+    Navigator.of(context).pop();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final InputDecoration titleFormFieldDec = InputDecoration(
@@ -39,12 +59,13 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           centerTitle: true,
           title: const Text('Add new Place'),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(11),
           child: Form(
               child: Column(
             children: [
               TextFormField(
+                controller: _titleController,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.primaryFixed,
                 ),
@@ -64,8 +85,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   foregroundColor: Theme.of(context).colorScheme.onPrimary,
                   shape: const StadiumBorder(),
                 ),
-                onPressed: () {},
-                child: const Text('Add Place', style: TextStyle(fontSize: 15)),
+                onPressed: _savePlace,
+                child: const Text(
+                  'Add Place',
+                  style: TextStyle(fontSize: 15),
+                ),
               )
             ],
           )),
