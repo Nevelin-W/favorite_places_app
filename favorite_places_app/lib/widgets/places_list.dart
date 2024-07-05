@@ -10,12 +10,13 @@ class PlacesList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (places.isEmpty) {
       return Center(
+        heightFactor: 15,
         child: Text(
           'No places yet, start adding some!',
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(fontWeight: FontWeight.w400),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              fontWeight: FontWeight.w400,
+              fontSize: 20,
+              color: Theme.of(context).colorScheme.onSurface),
         ),
       );
     }
