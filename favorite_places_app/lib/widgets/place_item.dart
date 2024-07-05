@@ -9,19 +9,26 @@ class PlaceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (ctx) => PlaceDetailScreen(item: item),
-        ));
-      },
-      dense: true,
-      contentPadding: const EdgeInsets.only(left: 17, top: 5),
-      title: Text(item.title,
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium!
-              .copyWith(fontWeight: FontWeight.w400)),
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: ListTile(
+        leading: CircleAvatar(
+          radius: 25,
+          backgroundImage: FileImage(item.image),
+        ),
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (ctx) => PlaceDetailScreen(item: item),
+          ));
+        },
+        dense: true,
+        contentPadding: const EdgeInsets.only(left: 17, top: 5),
+        title: Text(item.title,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(fontWeight: FontWeight.w400)),
+      ),
     );
   }
 }
