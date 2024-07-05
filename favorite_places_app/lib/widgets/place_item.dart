@@ -16,18 +16,21 @@ class PlaceItem extends StatelessWidget {
           radius: 25,
           backgroundImage: FileImage(item.image),
         ),
+        dense: true,
+        contentPadding: const EdgeInsets.only(left: 17, top: 5),
+        title: Text(
+          item.title,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.w400),
+        ),
+        subtitle: Text(item.location!.address),
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (ctx) => PlaceDetailScreen(item: item),
           ));
         },
-        dense: true,
-        contentPadding: const EdgeInsets.only(left: 17, top: 5),
-        title: Text(item.title,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(fontWeight: FontWeight.w400)),
       ),
     );
   }
