@@ -1,6 +1,7 @@
-import 'package:favorite_places_app/providers/places_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:favorite_places_app/providers/places_provider.dart';
+import 'package:favorite_places_app/widgets/image_input.dart';
 
 class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
@@ -56,6 +57,9 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
 
     return Scaffold(
         appBar: AppBar(
+          elevation: 3,
+          shadowColor: Theme.of(context).colorScheme.shadow,
+          backgroundColor: Theme.of(context).colorScheme.surfaceContainer,
           centerTitle: true,
           title: const Text('Add new Place'),
         ),
@@ -72,6 +76,10 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
                 decoration: titleFormFieldDec,
                 cursorColor: Theme.of(context).colorScheme.secondaryFixed,
               ),
+              const SizedBox(
+                height: 15,
+              ),
+              ImageInput(),
               const SizedBox(
                 height: 20,
               ),

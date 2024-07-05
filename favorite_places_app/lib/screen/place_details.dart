@@ -1,7 +1,7 @@
-import 'package:favorite_places_app/providers/places_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:favorite_places_app/model/place.dart';
+/* import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:favorite_places_app/providers/places_provider.dart'; */
 
 class PlaceDetailScreen extends StatelessWidget {
   const PlaceDetailScreen({super.key, required this.item});
