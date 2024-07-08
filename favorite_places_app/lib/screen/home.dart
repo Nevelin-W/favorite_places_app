@@ -6,7 +6,7 @@ import 'package:favorite_places_app/model/place.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
@@ -19,7 +19,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _placesFuture = ref.read(placesProvider.notifier).loadPlaces();
   }
