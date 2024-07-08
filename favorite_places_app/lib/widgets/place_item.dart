@@ -10,7 +10,7 @@ class PlaceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10, right: 6),
       child: ListTile(
         leading: CircleAvatar(
           radius: 25,
